@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Détails de l'employée</h2>
+<div class="card">
+  <p><strong>Nom :</strong> {{ employee.name }}</p>
+  <p><strong>Département :</strong> {{ employee.department }}</p>
+  <p><strong>Email :</strong> {{ employee.email }}</p>
+</div>
+<p>
+  <a class="button" href="/employees/{{ employee.id }}/edit">Modifier</a>
+  <form method="post" action="/employees/{{ employee.id }}/delete" style="display:inline;">
+    <button class="danger" type="submit">Supprimer</button>
+  </form>
+</p>
+<section>
+  <h3>Assets rattachés</h3>
+  <p><a class="button" href="/employees/{{ employee.id }}/assets/create">Ajouter un asset</a></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Numéro de série</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for asset in employee.assets %}
+      <tr>
+        <td>{{ asset.name }}</td>
+        <td>{{ asset.serial_number }}</td>
+        <td>{{ asset.description }}</td>
+        <td>
+          <a href="/assets/{{ asset.id }}/edit">Modifier</a>
+          <form method="post" action="/assets/{{ asset.id }}/delete" style="display:inline;">
+            <button class="danger" type="submit">Supprimer</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="4">Aucun asset pour cette employée.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

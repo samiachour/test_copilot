@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Liste des assets</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Numéro de série</th>
+      <th>Employée</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for asset in assets %}
+    <tr>
+      <td>{{ asset.name }}</td>
+      <td>{{ asset.serial_number }}</td>
+      <td>{{ asset.employee.name }}</td>
+      <td>
+        <a href="/assets/{{ asset.id }}/edit">Modifier</a>
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="4">Aucun asset enregistré.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

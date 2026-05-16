@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Liste des employées</h2>
+<p><a class="button" href="/employees/create">Ajouter une employée</a></p>
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Département</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for employee in employees %}
+    <tr>
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.department }}</td>
+      <td>{{ employee.email }}</td>
+      <td>
+        <a href="/employees/{{ employee.id }}">Voir</a>
+        <a href="/employees/{{ employee.id }}/edit">Modifier</a>
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="4">Aucune employée enregistrée.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

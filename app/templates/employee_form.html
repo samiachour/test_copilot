@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{% if employee %}Modifier une employée{% else %}Nouvelle employée{% endif %}</h2>
+<form method="post" action="{% if employee %}/employees/{{ employee.id }}/edit{% else %}/employees/create{% endif %}">
+  <label>Nom</label>
+  <input type="text" name="name" value="{{ employee.name if employee else '' }}" required />
+  <label>Département</label>
+  <input type="text" name="department" value="{{ employee.department if employee else '' }}" required />
+  <label>Email</label>
+  <input type="email" name="email" value="{{ employee.email if employee else '' }}" required />
+  <button type="submit">Enregistrer</button>
+</form>
+{% endblock %}

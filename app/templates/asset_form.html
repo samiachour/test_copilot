@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{% if asset %}Modifier un asset{% else %}Ajouter un asset{% endif %}</h2>
+<form method="post" action="{% if asset %}/assets/{{ asset.id }}/edit{% else %}/employees/{{ employee.id }}/assets/create{% endif %}">
+  <label>Nom</label>
+  <input type="text" name="name" value="{{ asset.name if asset else '' }}" required />
+  <label>Numéro de série</label>
+  <input type="text" name="serial_number" value="{{ asset.serial_number if asset else '' }}" required />
+  <label>Description</label>
+  <textarea name="description">{{ asset.description if asset else '' }}</textarea>
+  {% if asset %}
+  <label>Employée</label>
+  <input type="text" value="{{ employee.name }}" disabled />
+  <input type="hidden" name="employee_id" value="{{ employee.id }}" />
+  {% endif %}
+  <button type="submit">Enregistrer</button>
+</form>
+{% endblock %}
